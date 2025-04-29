@@ -1,3 +1,7 @@
 fastai
+fastcore
+duckduckgo-search
+fastdownload
+pillow
+fastapi
 uvicorn
-python-multipart
