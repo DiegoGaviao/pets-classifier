@@ -1,13 +1,15 @@
 from fastai.vision.all import *
 from fastapi import FastAPI, UploadFile
-import uvicorn
+from io import BytesIO
 
 app = FastAPI()
 
+def is_cat(x): return x[0].isupper()  # <<<<<< ADICIONAR ISSO AQUI!
+
 learn = load_learner('model.pkl')
 
-@app.post("/predict")
-async def predict(file: UploadFile):
-    img = PILImage.create(await file.read())
-    pred, pred_idx, probs = learn.predict(img)
-    return {"prediction": str(pred), "probability": probs[pred_idx].item()}
+@app.post("/analyze")
+async def analyze(file: UploadFile):
+    img = PILImage.create(BytesIO(await file.read()))
+    prediction, idx, probs = learn.predict(img)
+    return {"result": prediction}
