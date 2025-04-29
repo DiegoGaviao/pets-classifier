@@ -2,11 +2,11 @@ from fastai.vision.all import *
 from fastapi import FastAPI, UploadFile
 from io import BytesIO
 
+# Função usada no treinamento — precisa estar exatamente aqui!
+def is_cat(x): return x[0].isupper()
+
 # Criação da API
 app = FastAPI()
-
-# Função usada no treinamento — PRECISA estar aqui!
-def is_cat(x): return x[0].isupper()
 
 # Carregar modelo
 learn = load_learner('model.pkl')
