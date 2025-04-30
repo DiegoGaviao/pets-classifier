@@ -2,16 +2,16 @@ from fastai.vision.all import *
 from fastapi import FastAPI, UploadFile
 from io import BytesIO
 
-# Função usada no treinamento — precisa estar exatamente aqui!
+# ✅ A função is_cat precisa estar igual à usada no treinamento
 def is_cat(x): return x[0].isupper()
 
-# Criação da API
+# ✅ Criação da API
 app = FastAPI()
 
-# Carregar modelo
+# ✅ Carregar o modelo
 learn = load_learner('model.pkl')
 
-# Definir endpoint
+# ✅ Endpoint para inferência
 @app.post("/analyze")
 async def analyze(file: UploadFile):
     img = PILImage.create(BytesIO(await file.read()))
